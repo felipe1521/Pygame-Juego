@@ -1,14 +1,17 @@
 import pygame
 import random
+from os import path
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, WIDTH, HEIGHT):
-        pygame.sprite.Sprite.__init__(self)
-        self.BLUE = (0,0,255)
         self.width = WIDTH
         self.height = HEIGHT
-        self.image = pygame.Surface((50,50))
-        self.image.fill(self.BLUE)
+        self.BLUE = (0,0,255)
+        img_dir = path.join(path.dirname(__file__),'img')
+        player_img = pygame.image.load(path.join(img_dir,'pumpkin.png')).convert_alpha()
+
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.transform.scale(player_img,(60,80))
         self.rect = self.image.get_rect()
         self.rect.centerx = self.width / 2
         self.rect.bottom = self.height - 20

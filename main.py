@@ -1,5 +1,6 @@
 import pygame
 from sprite import Player, Mob
+from os import path
 
 #Definiendo constantes
 WIDTH = 480
@@ -8,6 +9,8 @@ FPS = 60
 BLACK = (0,0,0)
 WHITE = (255,255,255)
 
+#Inicializando directorio de imagenes
+img_dir = path.join(path.dirname(__file__),'img')
 
 #Inicializando pygame y creando la ventana
 pygame.init()
@@ -15,6 +18,9 @@ pygame.mixer.init()
 screen = pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption("Mi Juego")
 clock = pygame.time.Clock()
+
+background = pygame.image.load(path.join(img_dir,'background-terror.jpg')).convert()
+background_rect = background.get_rect()
 
 all_sprites= pygame.sprite.Group()
 mobs = pygame.sprite.Group()
@@ -64,6 +70,7 @@ while running:
 
     #Dibujar / Renderizar
     screen.fill(BLACK)
+    screen.blit(background, background_rect)
     all_sprites.draw(screen)
 
     #Despues de Dibujar todo
