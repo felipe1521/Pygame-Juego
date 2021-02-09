@@ -11,10 +11,16 @@ class Player(pygame.sprite.Sprite):
         player_img = pygame.image.load(path.join(img_dir,'pumpkin.png')).convert_alpha()
 
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.transform.scale(player_img,(60,80))
+        self.image = pygame.transform.scale(player_img,(60,60))
         self.rect = self.image.get_rect()
+        #Ajustando el radio de la imagen para adaptarla a las colisiones
+        
+        self.radius = int(self.rect.width * .8 / 2)
+        #pygame.draw.circle(self.image, self.BLUE,self.rect.center,self.radius)
+        
         self.rect.centerx = self.width / 2
         self.rect.bottom = self.height - 20
+        self.health = 100
 
     def update(self):
         self.x_speed = 0
